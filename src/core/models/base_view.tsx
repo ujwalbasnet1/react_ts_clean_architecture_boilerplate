@@ -31,7 +31,7 @@ export abstract class BaseView<T extends BaseViewModel<S> , S> extends React.Com
       
     public render(): JSX.Element {
         if(this.builder === null) {
-          throw "Builder cannot be empty";
+          throw Error("Builder cannot be empty");
         }
 
         return this.builder(this.viewModel);

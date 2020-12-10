@@ -15,21 +15,29 @@ export default class TodoViewModelImpl extends BaseViewModel<TodoComponentState>
   }
 
 
+  count: number = 0;
+
   public onFetch = async () => {
-    this.state.status = 'loading';
-    this.state.data = [];
-    this.updateView();
+    this.updateView(() => {
+      this.state.status = 'loading';
+      this.state.data = [];
+    });
     
     try {
       const jsonData = await this.todoRepository.onFetch();
-      this.state.status = 'data';
-      this.state.data = jsonData;
-      this.updateView();
+      
+      this.updateView(() => {
+        this.state.status = 'data';
+        this.state.data = jsonData;
+        this.state.count = this.count;
+        this.count += 1;
+      });
 
     } catch (err) {
-      this.state.status = 'error';
-      this.state.error = 'Check console please';
-      this.updateView();
+      this.updateView(() => {
+        this.state.status = 'error';
+        this.state.error = 'Check console please';  
+      });
     }
   };
 

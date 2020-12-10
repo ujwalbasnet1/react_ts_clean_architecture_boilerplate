@@ -12,7 +12,7 @@ export default class TodoComponent extends   BaseView<TodoViewModelImpl, TodoCom
   }
 
   builder(todoViewModel: TodoViewModelImpl): JSX.Element  {
-    const { data, status, error } = this.state;
+    const { data, status, error, count } = this.state;
     return (
       <div style={{ width: '90%', margin: 'auto' }}>
         <br />
@@ -35,7 +35,7 @@ export default class TodoComponent extends   BaseView<TodoViewModelImpl, TodoCom
         )}
         {status === 'data' && data.length > 0 && (
           <div>
-            <h1>Data</h1>
+            <h1>Data {count}</h1>
             {data.map((item, index) => (
               <TodoListItem key={index} {...item} />
             ))}
